@@ -58,23 +58,23 @@ class AgencyControl {
       // PHASE 3: Validation (Validator)
       console.log('✅ Phase 3: Validation - Scoring leads...');
       result.phases.validation = await this.phase3Validation(
-        result.phases.ideation.ideas,
+        result.phases.ideation.data || [],
         this.config.confidenceThreshold
       );
 
       // PHASE 4: Matching (Matcher)
       console.log('🎯 Phase 4: Matching - Routing to providers...');
-      result.phases.matching = await this.phase4Matching(result.phases.validation.contactReady);
+      result.phases.matching = await this.phase4Matching(result.phases.validation.data || []);
 
       // Autonomy Decision: Should we route more?
       if (result.phases.matching.leadsRouted < this.config.minLeadsToRoute) {
         console.log('ℹ️  Below minimum routing threshold, expanding validation criteria...');
         // Re-validate with lower threshold
         const moreLeads = await this.phase3Validation(
-          result.phases.ideation.ideas,
+          result.phases.ideation.data || [],
           this.config.confidenceThreshold - 0.10
         );
-        const additionalMatches = await this.phase4Matching(moreLeads.contactReady);
+        const additionalMatches = await this.phase4Matching(moreLeads.data || []);
         result.phases.matching.leadsRouted += additionalMatches.leadsRouted;
       }
 
@@ -150,14 +150,15 @@ class AgencyControl {
     console.log(`  Scoring ${ideas.length} ideas (threshold: ${threshold.toFixed(2)})...`);
 
     // Placeholder for Validator Agent
-    const scores = await this.simulateValidation(ideas, threshold);
-    const contactReady = scores.filter(s => s.confidence >= threshold);
+    const scores = await this.simulateValidation(ideas || [], threshold);
+    const validScores = scores || [];
+    const contactReady = validScores.filter(s => s && s.confidence >= threshold);
 
     return {
-      leadsScored: ideas.length,
+      leadsScored: ideas ? ideas.length : 0,
       contactReady: contactReady.length,
-      underReview: scores.filter(s => s.confidence >= threshold - 0.15 && s.confidence < threshold).length,
-      archived: scores.filter(s => s.confidence < threshold - 0.15).length,
+      underReview: validScores.filter(s => s && s.confidence >= threshold - 0.15 && s.confidence < threshold).length,
+      archived: validScores.filter(s => s && s.confidence < threshold - 0.15).length,
       data: contactReady
     };
   }
@@ -271,8 +272,9 @@ class AgencyControl {
   }
 
   async simulateMatching(leads) {
-    return leads.map(lead => ({
-      leadId: lead.id,
+    const safeLeads = leads || [];
+    return safeLeads.map(lead => ({
+      leadId: lead.id || `lead-${Math.random()}`,
       tier: Math.random() > 0.3 ? 'primary' : 'secondary',
       alternativeCount: Math.floor(Math.random() * 3) + 1
     }));
