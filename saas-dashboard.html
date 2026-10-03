@@ -193,7 +193,7 @@
           <p class="small">Dernier cycle de recherche Reddit · 5 subreddits</p>
         </div>
         <div class="actions-row">
-          <button class="btn btn-secondary" id="export">Exporter CSV</button>
+          <button class="btn btn-secondary" id="export" hidden>Exporter CSV</button>
           <button class="btn btn-primary">Nouveau cycle</button>
         </div>
       </header>
@@ -279,16 +279,24 @@
       render();
     }));
     $("#search").addEventListener("input", render);
-    $("#export").addEventListener("click", () => {
-      const rows = [["Titre", "Subreddit", "Urgence", "Type", "Volume", "Statut"],
-        ...leads.map(l => [l.titre, l.sub, l.urgence === "high" ? "Urgent" : "Non urgent", l.type, l.volume, l.statut])];
-      const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(";")).join("\n");
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8" }));
-      a.download = "leads-directgros.csv";
-      a.click();
-    });
     render();
+
+    (async () => {
+      const downloads = window.claude?.use ? await window.claude.use("downloads") : null;
+      if (!downloads) return;
+      const btn = $("#export");
+      btn.hidden = false;
+      btn.addEventListener("click", async () => {
+        const rows = [["Titre", "Subreddit", "Urgence", "Type", "Volume", "Statut"],
+          ...leads.map(l => [l.titre, l.sub, l.urgence === "high" ? "Urgent" : "Non urgent", l.type, l.volume, l.statut])];
+        const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(";")).join("\n");
+        try {
+          await downloads.save({ filename: "leads-directgros.csv", data: "﻿" + csv });
+        } catch (e) {
+          if (["unavailable", "not_granted", "capability_disabled", "capability_removed"].includes(e?.code)) btn.hidden = true;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
