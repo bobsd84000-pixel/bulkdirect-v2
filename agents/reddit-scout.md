@@ -42,9 +42,27 @@ Scan high-value subreddits for discussion threads that signal procurement needs,
 }
 ```
 
+## Extraction Pipeline (Hyper-Extract)
+
+Powered by **Hyper-Extract CLI** for efficient Reddit content parsing:
+
+1. **Thread Collection** - Fetch candidate threads from target subreddits
+2. **Text Extraction** - Parse title + selftext with Hyper-Extract patterns
+3. **Pattern Matching** - Identify pain points, volumes, urgency, specs
+4. **Confidence Scoring** - Calculate lead quality (0.0-1.0)
+5. **Filtering** - Return only high-confidence leads (≥0.65)
+
+**Key Patterns:**
+- Pain Points: "looking for", "need", "sourcing", "supplier", "vendor"
+- Volume: Bulk orders, quantities, wholesale requests
+- Urgency: "asap", "urgent", "this week", "immediately"
+- Specs: Requirements, specifications, "must have"
+
 ## Validation Rules
 
 - Reject personal/health data
 - Flag GDPR-sensitive content
 - Verify commercial context
 - Check for known spam patterns
+- Deduplicate by thread URL
+- Require confidence ≥ 0.65 for processing

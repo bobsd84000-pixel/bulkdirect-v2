@@ -1,0 +1,22 @@
+{
+  "name": "bulkdirect",
+  "version": "1.0.0",
+  "description": "AI-powered B2B lead generation with 4-agent swarm",
+  "main": "scripts/swarm-orchestrator.js",
+  "scripts": {
+    "swarm": "node scripts/swarm-orchestrator.js",
+    "adhd-brainstorm": "node scripts/brainstorm-agent.js",
+    "validate-leads": "node scripts/validator-agent.js",
+    "match-providers": "node scripts/matcher-agent.js",
+    "process-data": "node scripts/data-processor.js",
+    "extract-reddit": "node scripts/reddit-extractor.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.0.0",
+    "hyper-extract": "^0.1.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

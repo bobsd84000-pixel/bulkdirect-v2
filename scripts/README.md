@@ -34,6 +34,15 @@ Batch processing and data utilities:
 - `exportToCSV()`: Export leads to CSV format
 - `sanitizeForExternal()`: Remove internal fields before sharing
 
+### reddit-extractor.js
+**NEW** - Hyper-Extract powered Reddit content parser:
+- `extractThread()`: Parse single Reddit thread for lead signals
+- `extractBatch()`: Process multiple threads in parallel
+- `filterByConfidence()`: Filter by confidence threshold
+- `toLeadFormat()`: Convert extraction to lead schema
+- Pattern matching for pain points, volume, urgency, specs
+- Intelligent confidence scoring (0.0-1.0)
+
 ## API Integration
 
 These scripts require integration with:
