@@ -1,20 +1,16 @@
 /**
  * BulkDirect Reddit Extractor
- * Integrates Hyper-Extract for efficient Reddit content parsing
+ * Hyper-Extract inspired pattern matching for Reddit content parsing
  */
-
-const HyperExtract = require('hyper-extract');
 
 class RedditExtractor {
   constructor(options = {}) {
-    this.extractor = new HyperExtract({
-      patterns: {
-        painPoint: /(?:looking for|need|sourcing|can't find|supplier|vendor)/gi,
-        volumeIndicator: /(?:\d+\s*(?:units?|pieces?|bulk|order)|bulk\s*order|wholesale)/gi,
-        urgency: /(?:asap|urgent|immediately|soon|this week|next week)/gi,
-        specification: /(?:requires?|needs?|must have|specifications?|specs)/gi
-      }
-    });
+    this.patterns = {
+      painPoint: /(?:looking for|need|sourcing|can't find|supplier|vendor|purchasing|sourcing|looking to buy)/gi,
+      volumeIndicator: /(?:\d+\s*(?:units?|pieces?|bulk|order|qty|items?)|bulk\s*order|wholesale|monthly)/gi,
+      urgency: /(?:asap|urgent|immediately|soon|this week|next week|rush|fast)/gi,
+      specification: /(?:requires?|needs?|must have|specifications?|specs|requirement)/gi
+    };
     this.confidenceWeights = options.confidenceWeights || this.defaultWeights();
   }
 
@@ -66,7 +62,7 @@ class RedditExtractor {
    * Extract pain point indicators
    */
   _extractPainPoints(text) {
-    const matches = text.match(this.extractor.patterns.painPoint);
+    const matches = text.match(this.patterns.painPoint);
     return matches ? [...new Set(matches.map(m => m.toLowerCase()))] : [];
   }
 
@@ -74,7 +70,7 @@ class RedditExtractor {
    * Extract volume indicators
    */
   _extractVolumes(text) {
-    const matches = text.match(this.extractor.patterns.volumeIndicator);
+    const matches = text.match(this.patterns.volumeIndicator);
     return matches ? [...new Set(matches)] : [];
   }
 
@@ -82,7 +78,7 @@ class RedditExtractor {
    * Extract urgency signals
    */
   _extractUrgency(text) {
-    const matches = text.match(this.extractor.patterns.urgency);
+    const matches = text.match(this.patterns.urgency);
     return matches ? [...new Set(matches.map(m => m.toLowerCase()))] : [];
   }
 
@@ -90,7 +86,7 @@ class RedditExtractor {
    * Extract specifications
    */
   _extractSpecs(text) {
-    const matches = text.match(this.extractor.patterns.specification);
+    const matches = text.match(this.patterns.specification);
     return matches ? [...new Set(matches.map(m => m.toLowerCase()))] : [];
   }
 
@@ -101,22 +97,22 @@ class RedditExtractor {
     let score = 0;
 
     // Pain point signals
-    if (this.extractor.patterns.painPoint.test(fullText)) {
+    if (this.patterns.painPoint.test(fullText)) {
       score += this.confidenceWeights.explicitPainPoint;
     }
 
     // Volume indicators
-    if (this.extractor.patterns.volumeIndicator.test(fullText)) {
+    if (this.patterns.volumeIndicator.test(fullText)) {
       score += this.confidenceWeights.volumeIndicator;
     }
 
     // Urgency signals
-    if (this.extractor.patterns.urgency.test(fullText)) {
+    if (this.patterns.urgency.test(fullText)) {
       score += this.confidenceWeights.urgency;
     }
 
     // Specification details
-    if (this.extractor.patterns.specification.test(fullText)) {
+    if (this.patterns.specification.test(fullText)) {
       score += this.confidenceWeights.contextualMatch;
     }
 
