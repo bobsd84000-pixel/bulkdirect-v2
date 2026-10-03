@@ -1,8 +1,16 @@
 /**
- * BulkDirect 4-Agent Swarm Orchestrator
- * Coordinates Reddit Scout, Brainstorm, Validator, and Matcher agents
+ * BulkDirect 5-Agent Swarm Orchestrator
+ * Coordinates Reddit Scout, Brainstorm, Validator, Document Scanner, and Matcher agents
  * in parallel for efficient lead generation and provider matching.
  */
+
+const {
+  RedditScoutAgent,
+  BrainstormAgent,
+  ValidatorAgent,
+  DocumentScannerAgent,
+  MatcherAgent
+} = require('./agents');
 
 class SwarmOrchestrator {
   constructor(config = {}) {
@@ -18,15 +26,16 @@ class SwarmOrchestrator {
   }
 
   /**
-   * Initialize all four agents
+   * Initialize all five agents (4-agent core + Document Scanner)
    */
   async initialize() {
     this.agents.redditScout = new RedditScoutAgent(this.config);
     this.agents.brainstorm = new BrainstormAgent(this.config);
     this.agents.validator = new ValidatorAgent(this.config);
+    this.agents.documentScanner = new DocumentScannerAgent(this.config);
     this.agents.matcher = new MatcherAgent(this.config);
 
-    console.log('✓ 4-Agent Swarm initialized');
+    console.log('✓ 5-Agent Swarm initialized (with Document Scanner)');
   }
 
   /**
@@ -60,10 +69,19 @@ class SwarmOrchestrator {
       const qualityLeads = this.leads.filter(l => l.confidence >= this.config.confidenceThreshold);
       console.log(`${qualityLeads.length} leads passed quality threshold (≥${this.config.confidenceThreshold})\n`);
 
-      // Phase 4: Matcher - Route to providers
-      console.log('🎯 Phase 4: Matcher - Routing to providers...');
-      this.routes = await this.agents.matcher.matchAndRoute(qualityLeads);
+      // Phase 4: Document Scanner - Autonomous document extraction
+      console.log('📄 Phase 4: Document Scanner - Extracting & indexing documents...');
+      const documentEnrichedLeads = await this.agents.documentScanner.scanAndEnrichLeads(qualityLeads);
+      const leadsReadyForMatching = documentEnrichedLeads.filter(l => l.ready_for_matching);
+      console.log(`${leadsReadyForMatching.length} leads verified with documents\n`);
+
+      // Phase 5: Matcher - Route to providers
+      console.log('🎯 Phase 5: Matcher - Routing to providers...');
+      this.routes = await this.agents.matcher.matchAndRoute(leadsReadyForMatching);
       console.log(`Successfully routed ${this.routes.length} leads to providers\n`);
+
+      // Update leads with document enrichment
+      this.leads = documentEnrichedLeads;
 
       return {
         painPoints,
