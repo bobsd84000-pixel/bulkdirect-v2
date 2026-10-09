@@ -21,6 +21,13 @@ async function runDemo() {
 
   const result = await agency.executeCycle(cycleId);
 
+  // Cycle en échec : phases incomplètes, on arrête proprement au lieu de planter
+  if (result.error || !result.results) {
+    console.error(`\n❌ Cycle ${cycleId} échoué : ${result.error || 'résultats absents'}`);
+    process.exitCode = 1;
+    return result;
+  }
+
   // Display Results
   console.log('\n═══════════════════════════════════════════════════════════════');
   console.log('    CYCLE RESULTS');
@@ -72,7 +79,7 @@ async function runDemo() {
   if (result.phases.discovery.painPoints < 20) {
     console.log('   ✓ Expanded subreddit search (low pain point count)');
   }
-  if (result.phases.matching.leadsRouted < 20) {
+  if (result.phases.matching.expandedPass !== undefined) {
     console.log('   ✓ Lowered validation threshold (below routing minimum)');
   }
   const highTraps = result.phases.ideation.trapsDetected.filter(t => t.severity === 'high');

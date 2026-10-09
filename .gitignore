@@ -1,0 +1,13 @@
+# Secrets
+.env
+.env.local
+.env.*.local
+
+# Dépendances
+node_modules/
+
+# Exports de leads (données)
+*.csv
+
+# Système
+.DS_Store

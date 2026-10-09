@@ -3,6 +3,8 @@
  * Autonomous 4-agent swarm coordination with self-learning
  */
 
+const { safeDivide } = require('./data-processor');
+
 class AgencyControl {
   constructor(config = {}) {
     this.config = {
@@ -74,8 +76,19 @@ class AgencyControl {
           result.phases.ideation.data || [],
           this.config.confidenceThreshold - 0.10
         );
-        const additionalMatches = await this.phase4Matching(moreLeads.data || []);
-        result.phases.matching.leadsRouted += additionalMatches.leadsRouted;
+        // Ne re-router que les leads PAS déjà routés au 1er passage (évite le double comptage)
+        const alreadyRouted = new Set(result.phases.matching.data.map(r => r.leadId));
+        const newLeads = (moreLeads.data || []).filter(l => !alreadyRouted.has(l.id));
+        const additionalMatches = await this.phase4Matching(newLeads);
+
+        const matching = result.phases.matching;
+        matching.data = [...matching.data, ...additionalMatches.data];
+        matching.leadsRouted = matching.data.length;
+        matching.primaryMatches += additionalMatches.primaryMatches;
+        matching.secondaryOptions += additionalMatches.secondaryOptions;
+        matching.expandedPass = additionalMatches.leadsRouted;
+        // Les leads du 2e passage comptent dans la confiance moyenne
+        result.phases.validation.data = [...result.phases.validation.data, ...newLeads];
       }
 
       // Calculate results
@@ -111,7 +124,7 @@ class AgencyControl {
 
     return {
       painPoints: painPoints.length,
-      avgConfidence: painPoints.reduce((sum, p) => sum + p.confidence, 0) / painPoints.length,
+      avgConfidence: safeDivide(painPoints.reduce((sum, p) => sum + p.confidence, 0), painPoints.length),
       data: painPoints
     };
   }
@@ -189,7 +202,10 @@ class AgencyControl {
 
     return {
       routableLeads,
-      successRate: routableLeads / totalLeads,
+      // Succès = part des leads routés qui ont un fournisseur principal
+      successRate: safeDivide(phases.matching.primaryMatches, routableLeads),
+      // Part des idées scorées qui finissent routées (entonnoir)
+      routingRate: safeDivide(routableLeads, totalLeads),
       avgConfidence: this.calculateAvgConfidence(phases.validation.data),
       topNovelIdeas: phases.ideation.novelIdeas,
       trapsDetected: phases.ideation.trapsDetected.length
@@ -288,3 +304,15 @@ class AgencyControl {
 }
 
 module.exports = AgencyControl;
+
+// Lancement direct : npm start
+if (require.main === module) {
+  const agency = new AgencyControl();
+  agency.executeCycle(`cycle-${Date.now()}`).then(result => {
+    if (result.error) {
+      process.exitCode = 1;
+      return;
+    }
+    console.log(JSON.stringify(result.results, null, 2));
+  });
+}
