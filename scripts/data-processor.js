@@ -34,7 +34,7 @@ class DataProcessor {
       volume: lead.volumeIndicator,
       urgency: lead.urgency,
       confidenceScore: lead.confidence,
-      sourceUrl: lead.sourceUrl,
+      // sourceUrl volontairement absent : donnée interne (cf. sanitizeForExternal)
       timestamp: new Date().toISOString()
     };
   }
@@ -45,12 +45,15 @@ class DataProcessor {
   static calculateMetrics(leads, routes) {
     const totalLeads = leads.length;
     const routedLeads = routes.filter(r => r.status === 'ready').length;
-    const avgConfidence = leads.reduce((sum, l) => sum + l.confidence, 0) / totalLeads;
+    const avgConfidence = DataProcessor.safeDivide(
+      leads.reduce((sum, l) => sum + (Number(l.confidence) || 0), 0),
+      totalLeads
+    );
 
     return {
       totalProcessed: totalLeads,
       successfulRoutes: routedLeads,
-      successRate: routedLeads / totalLeads,
+      successRate: DataProcessor.safeDivide(routedLeads, totalLeads),
       averageConfidence: avgConfidence,
       distribution: {
         high: leads.filter(l => l.confidence >= 0.85).length,
@@ -68,7 +71,7 @@ class DataProcessor {
     const rows = leads.map(lead => [
       lead.id,
       lead.painPoint,
-      lead.confidence.toFixed(2),
+      Number.isFinite(lead.confidence) ? lead.confidence.toFixed(2) : '',
       lead.urgency,
       lead.volumeIndicator,
       lead.status,
@@ -77,8 +80,25 @@ class DataProcessor {
 
     return [
       headers.join(','),
-      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+      ...rows.map(row => row.map(DataProcessor.escapeCsvCell).join(','))
     ].join('\n');
+  }
+
+  /**
+   * Échappe une cellule CSV : guillemets doublés + neutralisation des formules
+   * (=, +, -, @, tab, CR) pour bloquer l'injection dans Excel / Sheets.
+   */
+  static escapeCsvCell(value) {
+    let text = value === null || value === undefined ? '' : String(value);
+    if (/^[=+\-@\t\r]/.test(text)) text = `'${text}`;
+    return `"${text.replace(/"/g, '""')}"`;
+  }
+
+  /**
+   * Division sans NaN / Infinity : renvoie 0 si le dénominateur est nul.
+   */
+  static safeDivide(a, b) {
+    return b > 0 ? a / b : 0;
   }
 
   /**
