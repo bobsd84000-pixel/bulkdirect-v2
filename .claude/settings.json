@@ -1,0 +1,4 @@
+{
+  "permissions": {"deny": ["Read(./.env)","Edit(./.env)","Write(./.env)"]},
+  "hooks": {"PostToolUse": [{"matcher": "Edit|Write","hooks": [{"type": "command","command": "node -e \"let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{const f=(JSON.parse(d).tool_input||{}).file_path||'';if(!f.endsWith('.js'))return;try{require('child_process').execSync('node --check '+JSON.stringify(f),{stdio:'pipe'})}catch(e){console.error(String(e.stderr));process.exit(2)}})\""}]}]}
+}
