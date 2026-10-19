@@ -1,0 +1,31 @@
+{
+  "name": "bulkdirect-v2",
+  "version": "1.0.0",
+  "description": "AI-powered B2B lead generation with 4-agent swarm",
+  "main": "scripts/swarm-orchestrator.js",
+  "scripts": {
+    "swarm": "node scripts/swarm-orchestrator.js",
+    "demo": "node scripts/demo-agency.js",
+    "test": "node --test",
+    "start": "node scripts/agency-control.js"
+  },
+  "keywords": [
+    "lead-generation",
+    "b2b",
+    "agents",
+    "claude",
+    "reddit"
+  ],
+  "author": "BulkDirect Team",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.24.0",
+    "dotenv": "^16.4.5",
+    "node-fetch": "^2.7.0",
+    "csv-writer": "^1.6.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BulkDirect: une agence d'agents IA spécialisés pour trouver des besoins B2B sur Reddit et les envoyer aux bons fournisseurs.">
+<title>BulkDirect Agency</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#262d36;--txt:#e6edf3;--mut:#8b949e;--acc:#ff4500;--acc2:#f59e0b}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#fafafa;--card:#fff;--line:#e3e6ea;--txt:#1a1a1a;--mut:#5b6470}}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.55}
+a{color:var(--acc)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+nav{display:flex;justify-content:space-between;align-items:center;height:60px}
+.logo{font-weight:800;font-size:20px}
+.logo b{color:var(--acc)}
+nav a{color:var(--mut);text-decoration:none;margin-left:22px;font-size:14px}
+nav a:hover{color:var(--txt)}
+.hero{padding:90px 0 60px;text-align:center}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:4px 14px;font-size:13px;color:var(--mut);margin-bottom:22px}
+.hero h1{font-size:clamp(34px,6vw,60px);line-height:1.1;font-weight:800;margin-bottom:18px}
+.hero h1 span{color:var(--acc)}
+.hero p{max-width:640px;margin:0 auto 30px;color:var(--mut);font-size:18px}
+.btn{display:inline-block;padding:12px 26px;border-radius:8px;font-weight:600;text-decoration:none;font-size:15px}
+.btn-p{background:var(--acc);color:#fff}
+.btn-s{border:1px solid var(--line);color:var(--txt);margin-left:10px}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:10px 0 70px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.step small{color:var(--acc);font-weight:700}
+.step h3{margin:4px 0 6px;font-size:17px}
+.step p{color:var(--mut);font-size:14px}
+h2{font-size:30px;margin-bottom:8px}
+.sub{color:var(--mut);margin-bottom:24px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.filters button{background:var(--card);color:var(--txt);border:1px solid var(--line);border-radius:99px;padding:7px 16px;font-size:14px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.agent{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--c);border-radius:12px;padding:20px;transition:transform .2s}
+.agent:hover{transform:translateY(-4px)}
+.agent .em{font-size:34px}
+.agent h3{font-size:18px;margin:6px 0 2px}
+.role{display:inline-block;font-size:12px;font-weight:700;color:var(--c);margin-bottom:8px}
+.agent p{color:var(--mut);font-size:14px;font-style:italic}
+.agent code{display:block;margin-top:12px;font-size:12px;color:var(--mut)}
+.band{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:30px;margin:70px 0}
+.band ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:14px}
+.band li{font-size:14px;color:var(--mut)}
+.band li b{color:var(--txt);display:block}
+footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;color:var(--mut);font-size:14px;margin-top:60px}
+@media(max-width:600px){nav a{margin-left:12px}.btn-s{margin:10px 0 0}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav>
+<div class="logo">Bulk<b>Direct</b> Agency</div>
+<div><a href="#flow">Cycle</a><a href="#agents">Les agents</a><a href="#regles">Règles</a></div>
+</nav></div></header>
+
+<main class="wrap">
+<section class="hero">
+<span class="tag">12 agents spécialisés · pack agency-agents (MIT)</span>
+<h1>Une agence d'IA qui trouve vos <span>besoins B2B</span> sur Reddit</h1>
+<p>Chaque agent a son métier, sa méthode et ses livrables. Ils repèrent un besoin, le testent, puis l'envoient au bon fournisseur.</p>
+<a class="btn btn-p" href="#agents">Voir l'équipe</a><a class="btn btn-s" href="https://github.com/msitarzewski/agency-agents">Le pack sur GitHub</a>
+</section>
+
+<section id="flow" class="flow" aria-label="Cycle en 4 étapes">
+<div class="step"><small>ÉTAPE 1</small><h3>Reddit Scout</h3><p>Repère les besoins et les tendances dans les subreddits pro.</p></div>
+<div class="step"><small>ÉTAPE 2</small><h3>Brainstorm</h3><p>Trouve des angles et des offres que personne n'a essayés.</p></div>
+<div class="step"><small>ÉTAPE 3</small><h3>Validator</h3><p>Vérifie les faits, le pipeline et la conformité des données.</p></div>
+<div class="step"><small>ÉTAPE 4</small><h3>Matcher</h3><p>Choisit le bon fournisseur et prépare le premier contact.</p></div>
+</section>
+
+<section id="agents">
+<h2>L'équipe</h2>
+<p class="sub">Choisissez une étape pour voir qui y travaille.</p>
+<div class="filters" role="group" aria-label="Filtrer par étape">
+<button aria-pressed="true" data-f="all">Tous</button>
+<button aria-pressed="false" data-f="Scout">Scout</button>
+<button aria-pressed="false" data-f="Brainstorm">Brainstorm</button>
+<button aria-pressed="false" data-f="Validator">Validator</button>
+<button aria-pressed="false" data-f="Matcher">Matcher</button>
+<button aria-pressed="false" data-f="Chef">Chef</button>
+</div>
+<div class="grid" id="grid"></div>
+</section>
+
+<section id="regles" class="band">
+<h2>Règles de l'agence</h2>
+<ul>
+<li><b>Pas de spam</b>On aide d'abord, on ne vend pas sur Reddit.</li>
+<li><b>Données minimales</b>Seulement ce qu'il faut pour relier un besoin à un fournisseur.</li>
+<li><b>Preuve avant envoi</b>Le Reality Checker répond « à revoir » tant que la preuve manque.</li>
+<li><b>Un chef</b>L'Agents Orchestrator enchaîne les étapes et garde le contrôle.</li>
+</ul>
+</section>
+</main>
+
+<footer><div class="wrap">BulkDirect · agents issus de <a href="https://github.com/msitarzewski/agency-agents">msitarzewski/agency-agents</a> (licence MIT)</div></footer>
+
+<script>
+var AGENTS=[
+{e:"💬",n:"Reddit Community Builder",s:"Scout",c:"#FF4500",v:"Speaks fluent Reddit and builds community trust the authentic way.",f:"marketing-reddit-community-builder"},
+{e:"🔭",n:"Trend Researcher",s:"Scout",c:"#A78BFA",v:"Spots emerging trends before they hit the mainstream.",f:"product-trend-researcher"},
+{e:"🔍",n:"Feedback Synthesizer",s:"Scout",c:"#3B82F6",v:"Distills a thousand user voices into the five things you need to build next.",f:"product-feedback-synthesizer"},
+{e:"🚀",n:"Growth Hacker",s:"Brainstorm",c:"#22C55E",v:"Finds the growth channel nobody's exploited yet — then scales it.",f:"marketing-growth-hacker"},
+{e:"🧲",n:"Offer & Lead Gen Strategist",s:"Brainstorm",c:"#F59E0B",v:"Builds the thing buyers can't ignore — then multiplies the channels that deliver it.",f:"sales-offer-lead-gen-strategist"},
+{e:"🧐",n:"Reality Checker",s:"Validator",c:"#EF4444",v:"Defaults to \"NEEDS WORK\" — requires overwhelming proof for production readiness.",f:"testing-reality-checker"},
+{e:"📊",n:"Pipeline Analyst",s:"Validator",c:"#059669",v:"Tells you your forecast is wrong before you realize it yourself.",f:"sales-pipeline-analyst"},
+{e:"🔐",n:"Data Privacy Officer",s:"Validator",c:"#8B5CF6",v:"Treats personal data as a liability to be minimized rather than an asset to be hoarded.",f:"data-privacy-officer"},
+{e:"🎯",n:"Outbound Strategist",s:"Matcher",c:"#E8590C",v:"Turns buying signals into booked meetings before the competition even notices.",f:"sales-outbound-strategist"},
+{e:"🔍",n:"Discovery Coach",s:"Matcher",c:"#5C7CFA",v:"Asks one more question than everyone else — and that's the one that closes the deal.",f:"sales-discovery-coach"},
+{e:"🔗",n:"Supply Chain Strategist",s:"Matcher",c:"#0EA5E9",v:"Builds your procurement engine and supply chain resilience, from supplier sourcing to risk management.",f:"supply-chain-strategist"},
+{e:"🎛️",n:"Agents Orchestrator",s:"Chef",c:"#06B6D4",v:"The conductor who runs the entire pipeline from spec to ship.",f:"agents-orchestrator"}
+];
+var grid=document.getElementById('grid');
+function render(f){
+  grid.textContent='';
+  AGENTS.filter(function(a){return f==='all'||a.s===f}).forEach(function(a){
+    var d=document.createElement('article');d.className='agent';d.style.setProperty('--c',a.c);
+    var em=document.createElement('div');em.className='em';em.textContent=a.e;
+    var h=document.createElement('h3');h.textContent=a.n;
+    var r=document.createElement('span');r.className='role';r.textContent=a.s.toUpperCase();
+    var p=document.createElement('p');p.textContent='« '+a.v+' »';
+    var c=document.createElement('code');c.textContent='agents/agency/'+a.f+'.md';
+    [em,h,r,p,c].forEach(function(x){d.appendChild(x)});
+    grid.appendChild(d);
+  });
+}
+document.querySelectorAll('.filters button').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.filters button').forEach(function(x){x.setAttribute('aria-pressed','false')});
+    b.setAttribute('aria-pressed','true');render(b.dataset.f);
+  });
+});
+render('all');
+</script>
+</body>
+</html>
