@@ -1,0 +1,218 @@
+{
+  "package.json": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.436827,
+    "ast_hash": "8b6ab5ed35139ee6680fb9ec6c779bb5",
+    "semantic_hash": ""
+  },
+  "scripts/agency-control.js": {
+    "mtime": 1792614204.0803807,
+    "seen": 1792614252.4368343,
+    "ast_hash": "e54101026f61c51ff357d2ae57476dc9",
+    "semantic_hash": ""
+  },
+  "scripts/agents.js": {
+    "mtime": 1792614204.0803807,
+    "seen": 1792614252.436838,
+    "ast_hash": "0be7a82c9be653bea312a9ee4f5256a9",
+    "semantic_hash": ""
+  },
+  "scripts/data-processor.js": {
+    "mtime": 1792614204.0803807,
+    "seen": 1792614252.4368398,
+    "ast_hash": "5bd27c511471852b95e3c9464447b48c",
+    "semantic_hash": ""
+  },
+  "scripts/demo-agency.js": {
+    "mtime": 1792614204.0803807,
+    "seen": 1792614252.4368417,
+    "ast_hash": "a05be17e10dd43ba152e2ed99d4229ec",
+    "semantic_hash": ""
+  },
+  "scripts/swarm-orchestrator.js": {
+    "mtime": 1792614204.0803807,
+    "seen": 1792614252.436844,
+    "ast_hash": "d9740a09a5075c55ce9ea9cbd7c7a8f3",
+    "semantic_hash": ""
+  },
+  "setup.sh": {
+    "mtime": 1792614204.0803807,
+    "seen": 1792614252.4368458,
+    "ast_hash": "58c15aa1860319bc395cc94e2b10d4cf",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1792614204.0777395,
+    "seen": 1792614252.4368472,
+    "ast_hash": "fafe32d1ad05ec23fc745021de8ecb03",
+    "semantic_hash": ""
+  },
+  "agents/agency/README.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368486,
+    "ast_hash": "27c45d52ab92d4c699658dde3772ff45",
+    "semantic_hash": ""
+  },
+  "agents/agency/agents-orchestrator.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.43685,
+    "ast_hash": "a47e509bb98047195f93ae3dbae2d453",
+    "semantic_hash": ""
+  },
+  "agents/agency/data-privacy-officer.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368517,
+    "ast_hash": "c5dc3bd6f589debc18ffa42226f81bdd",
+    "semantic_hash": ""
+  },
+  "agents/agency/marketing-growth-hacker.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368534,
+    "ast_hash": "c4b31adcafcc0c3aa49661d1101a2a12",
+    "semantic_hash": ""
+  },
+  "agents/agency/marketing-reddit-community-builder.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368556,
+    "ast_hash": "096c4535ea6a21866f9bca009b91025b",
+    "semantic_hash": ""
+  },
+  "agents/agency/product-feedback-synthesizer.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368567,
+    "ast_hash": "ecc3c3cb652f63625579e25773dfa620",
+    "semantic_hash": ""
+  },
+  "agents/agency/product-trend-researcher.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368584,
+    "ast_hash": "ddd713027d92da7198369ed35ce27e09",
+    "semantic_hash": ""
+  },
+  "agents/agency/sales-discovery-coach.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368598,
+    "ast_hash": "d945238375b4280da047f94eb98af9db",
+    "semantic_hash": ""
+  },
+  "agents/agency/sales-offer-lead-gen-strategist.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368613,
+    "ast_hash": "d5088e6aaa09d91bd03eb72b945fe129",
+    "semantic_hash": ""
+  },
+  "agents/agency/sales-outbound-strategist.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368625,
+    "ast_hash": "5b05b2011dd62fd51c852cc3a7273e9d",
+    "semantic_hash": ""
+  },
+  "agents/agency/sales-pipeline-analyst.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368641,
+    "ast_hash": "ca686473f15755315ec81c1ee46054e9",
+    "semantic_hash": ""
+  },
+  "agents/agency/supply-chain-strategist.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.436866,
+    "ast_hash": "394f7f4aaaa1adabb07ba0ed331c1d1f",
+    "semantic_hash": ""
+  },
+  "agents/agency/testing-reality-checker.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368675,
+    "ast_hash": "8993038664ce38aa0d7e52c96aab2d4d",
+    "semantic_hash": ""
+  },
+  "agents/brainstorm.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368691,
+    "ast_hash": "af42528913ab2a5d77904296fc27922a",
+    "semantic_hash": ""
+  },
+  "agents/matcher.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.436872,
+    "ast_hash": "2e86f7f291e15084dcbdabb68a1e6f87",
+    "semantic_hash": ""
+  },
+  "agents/reddit-scout.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368732,
+    "ast_hash": "b266afe82ea11793511740d8198cf918",
+    "semantic_hash": ""
+  },
+  "agents/validator.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368749,
+    "ast_hash": "ae582d0ae59711b218e3f7bd2044d049",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.4368765,
+    "ast_hash": "ee600698b68bef568a6cff6c939a58e0",
+    "semantic_hash": ""
+  },
+  "rules/data-handling.md": {
+    "mtime": 1792614204.0786254,
+    "seen": 1792614252.436878,
+    "ast_hash": "0272ad43aae95aaf6e0a18e5eb6381ef",
+    "semantic_hash": ""
+  },
+  "rules/lead-quality.md": {
+    "mtime": 1792614204.0802717,
+    "seen": 1792614252.4368796,
+    "ast_hash": "3c681a1859da5777235c2fe4e41b1c5a",
+    "semantic_hash": ""
+  },
+  "rules/security.md": {
+    "mtime": 1792614204.0802717,
+    "seen": 1792614252.4368813,
+    "ast_hash": "547acc4e7e6915e2c3f4bc3341965d57",
+    "semantic_hash": ""
+  },
+  "scripts/README.md": {
+    "mtime": 1792614204.0802717,
+    "seen": 1792614252.4368827,
+    "ast_hash": "5a7c0593d1c07a5500bbe9667d6bc213",
+    "semantic_hash": ""
+  },
+  "skills/adhd-ideation.md": {
+    "mtime": 1792614204.0803807,
+    "seen": 1792614252.4368842,
+    "ast_hash": "85c6f7a091e1b9aacaddaa32044e23a7",
+    "semantic_hash": ""
+  },
+  "skills/agency-agents.md": {
+    "mtime": 1792614204.0807145,
+    "seen": 1792614252.4368856,
+    "ast_hash": "4bf4f12ed9b2f5b5c816fbe708488014",
+    "semantic_hash": ""
+  },
+  "skills/lead-validation.md": {
+    "mtime": 1792614204.0807145,
+    "seen": 1792614252.4368875,
+    "ast_hash": "5b0e361cc36109868bfbdb93aa51ca5b",
+    "semantic_hash": ""
+  },
+  "skills/provider-matching.md": {
+    "mtime": 1792614204.0807145,
+    "seen": 1792614252.4368894,
+    "ast_hash": "5ce0afbb8e624849c5d6be2608bce4f8",
+    "semantic_hash": ""
+  },
+  "skills/reddit-analysis.md": {
+    "mtime": 1792614204.0807145,
+    "seen": 1792614252.4368908,
+    "ast_hash": "d74b1d20753f4bbfe88f92db44da7b24",
+    "semantic_hash": ""
+  },
+  "v1/index.html": {
+    "mtime": 1792614204.0807145,
+    "seen": 1792614252.4368925,
+    "ast_hash": "8b3ea9e7ca618c2e5c966573bcf6e7e9",
+    "semantic_hash": ""
+  }
+}
